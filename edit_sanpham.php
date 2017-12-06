@@ -8,7 +8,7 @@
 	$id1=$result2['danhmuc'] ;
 	$id2=$result2['nhacungcap'] ;
 	// echo "<pre>";
-	// var_dump($result2);
+	// // var_dump($result2);
 	$sel=$connect->prepare("SELECT * FROM danhmuc WHERE id=$id1");
 	$sel->execute();
 	$sel->setFetchMode(PDO::FETCH_ASSOC);
@@ -25,7 +25,6 @@
 	$select1->execute();
 	$select1->setFetchMode(PDO::FETCH_ASSOC);
 	$result1=$select1->fetchAll();
-	// var_dump($res);
  ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -38,6 +37,7 @@
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
 </head>
 <body>
+
 	<div class="container">
 		<div class="col-xs-4">
 			<form action="update_sanpham.php?id=<?php echo $id; ?>" method="POST" role="form">
@@ -54,18 +54,32 @@
 			<div class="form-group">
 				<label for="">Danh mục</label>
 				<select name="danhmuc" id="">
-					<option value="<?php echo $res['id'] ;?>"><?php echo $res['tendanhmuc']; ?></option>
+					<option value="<?php echo $res['id'] ;?>">
+						<?php 
+							echo $res['tendanhmuc']; 
+						?>	
+					</option>
+					<?php unset($result[$res['id']-1]); ?>
 					<?php foreach ($result as $key => $value) {?>
-						<option value="<?php echo $value['id'] ?>"><?php echo $value['tendanhmuc']; ?></option>
+						<option value="<?php echo $value['id'] ?>">
+							<?php echo $value['tendanhmuc']; ?>		
+						</option>
+						<?php var_dump($value); ?>
 					<?php } ?>
+
 				</select>
 			</div>
 			<div class="form-group">
 				<label for="">Nhà cung cấp</label>
 				<select name="nhacungcap" id="">
-					<option value="<?php echo $res1['id'] ;?>"><?php echo $res1['tennhacungcap']; ?></option>
+					<option value="<?php echo $res1['id'] ;?>">
+						<?php echo $res1['tennhacungcap']; ?> 
+					</option>
+					<?php unset($result1[$res1['id']-1]) ?>
 					<?php foreach ($result1 as $key => $value) {?>
-						<option value="<?php echo $value['id'] ?>"><?php echo $value['tennhacungcap']; ?></option>
+						<option value="<?php echo $value['id'] ?>">
+							<?php echo $value['tennhacungcap']; ?>
+						</option>
 					<?php } ?>
 				</select>
 			</div>
