@@ -59,11 +59,13 @@
 							echo $res['tendanhmuc']; 
 						?>	
 					</option>
-					<?php unset($result[$res['id']-1]); ?>
+					//<?php unset($result[$res['id']-1]); ?>(c1)
 					<?php foreach ($result as $key => $value) {?>
-						<option value="<?php echo $value['id'] ?>">
-							<?php echo $value['tendanhmuc']; ?>		
-						</option>
+						<?php if($res['id']!=$value['id]){ ?>
+							<option value="<?php echo $value['id'] ?>">
+								<?php echo $value['tendanhmuc']; ?>		
+							</option>
+						<?php } ?>
 						<?php var_dump($value); ?>
 					<?php } ?>
 
